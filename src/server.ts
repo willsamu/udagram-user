@@ -2,10 +2,11 @@ import cors from "cors";
 import express from "express";
 import { sequelize } from "./sequelize";
 
+import { UserRouter } from "./users/routes/user.router";
+
 import bodyParser from "body-parser";
 import { config } from "./config/config";
 import V0_USER_MODELS from "./users/model.index";
-import { UserRouter } from "./users/routes/user.router";
 
 (async () => {
   await sequelize.addModels(V0_USER_MODELS);
@@ -36,6 +37,5 @@ import { UserRouter } from "./users/routes/user.router";
   // Start the Server
   app.listen(port, () => {
     console.log(`server running ${config.url} | USER port: ${port}`);
-    console.log(`press CTRL+C to stop server`);
   });
 })();

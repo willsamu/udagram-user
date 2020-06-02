@@ -9,7 +9,7 @@
     "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
     "prod": "tsc -b",
     "clean": "rm -rf www/ || true",
-    "build": "npm run clean && tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json && cd www && zip -r Archive.zip . && cd ..",
+    "build": "docker build -t udagram-api-user --build-arg POSTGRES_USERNAME=${POSTGRES_USERNAME} --build-arg POSTGRES_PASSWORD=${POSTGRES_PASSWORD} --build-arg POSTGRES_HOST=${POSTGRES_HOST} --build-arg POSTGRES_DB=${POSTGRES_DB} --build-arg AWS_BUCKET=${AWS_BUCKET} --build-arg AWS_REGION=${AWS_REGION} --build-arg AWS_PROFILE=${AWS_PROFILE} --build-arg JWT_SECRET=${JWT_SECRET} --build-arg URL=${URL} --build-arg PORT_UDAGRAM_USER=${PORT_UDAGRAM_USER} .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,6 +18,7 @@
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/jsonwebtoken": "^8.3.2",
+    "@types/uuid": "^8.0.0",
     "aws-sdk": "^2.429.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
